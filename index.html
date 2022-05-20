@@ -8,26 +8,28 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-   <div id="app" class="container">
-        <div class="items" @mouseover="stopAnimation()" @mouseleave="startAnimation()">
+    <div id="app">
+        <div class="container">
+            <div class="items" @mouseover="stopAnimation()" @mouseleave="startAnimation()">
+                
+                <div class="item active">
+                    <img :src="images[currentIndex].src" alt="">
+                    <div class="text">
+                        <h3>{{images[currentIndex].title}}</h3>
+                        <p>{{images[currentIndex].text}}</p>
+                    </div>
+                </div> 
             
-            <div class="item active">
-                <img :src="images[currentIndex].src" alt="">
-                <div class="text">
-                    <h3>{{images[currentIndex].title}}</h3>
-                    <p>{{images[currentIndex].text}}</p>
-                </div>
-            </div> 
-           
+            </div>
+            <div class="thumbs" @mouseover="stopAnimation()" @mouseleave="startAnimation()">
+                <div class="prev" @click="beforeImg()"></div> 
+                <div class="thumb" :class="{active: currentIndex=== i}" @click="selectIndex(i)" v-for="(img,i) in images">
+                    <img :src="img.src" :alt="img.title">
+                </div>            
+                <div class="next" @click="nextImg()"></div>
+            </div>
         </div>
-        <div class="thumbs" @mouseover="stopAnimation()" @mouseleave="startAnimation()">
-            <div class="prev" @click="beforeImg()"></div> 
-            <div class="thumb" :class="{active: currentIndex=== i }" @click="selectIndex(i)" v-for="(img,i) in images">
-                <img :src="img.src" :alt="img.title">
-            </div>            
-            <div class="next" @click="nextImg()"></div>
-        </div>
-   </div>
+    </div>
    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
    <script src="js/main.js"></script>
 </body>
