@@ -1,6 +1,7 @@
 let app = new Vue({
     el: '#app',
     data: {
+        animation: null,
         currentIndex : 0,
         images : [
             {
@@ -39,12 +40,21 @@ let app = new Vue({
         },
         selectIndex(i){
             this.currentIndex = i 
+        },
+        startAnimation(){
+            this.animation = setInterval(()=>{this.nextImg()}, 3000)   
+        },
+        stopAnimation(){
+            clearInterval(this.animation)
+            console.log("mouse entrato");
         }
+       
     },
-    mounted(){
-        setInterval(function(){
-            nextImg()
-        },3000)
-    }
+    mounted() {
+        this.startAnimation();
+    },
+    beforeDestroy() {
+        this.stopAnimation();
+    },
+    });
     
-})
